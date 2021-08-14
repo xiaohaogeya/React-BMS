@@ -1,4 +1,4 @@
-import React, {Component, ReactNode, Suspense} from "react";
+import React, {Component, ReactNode, Suspense, Fragment} from "react";
 import router, {IRouter, unAuthRouter} from '../router';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import AppLayout from "./AppLayout";
@@ -10,9 +10,9 @@ export default class View extends Component {
             routerList?.map(r => {
                 if (r.children) {
                     return (
-                        <>
+                        <Fragment key={r.key}>
                             {this.generateRouter(r.children)}
-                        </>
+                        </Fragment>
                     )
                 }
                 return (

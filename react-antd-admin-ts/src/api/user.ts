@@ -27,3 +27,11 @@ export const deleteUser = (data: any) => {
     return _delete(req)
 }
 
+// 添加管理员
+export const addAdmin = (data: any) => {
+    const req = {
+        data,
+        url: 'user/'
+    }
+    return _post(req)
+}

@@ -44,10 +44,13 @@ service.interceptors.response.use(
     },
     error => {
         // console.log('拦截错误', error.response)
-        Modal.error({
-            title: '网络请求错误'
-        });
-        NProgress.done();
+        if (error.response.status in [500, 501, 502]){
+            Modal.error({
+                title: '网络请求错误'
+            });
+            NProgress.done();
+
+        }
         return Promise.reject(error)
     }
 )

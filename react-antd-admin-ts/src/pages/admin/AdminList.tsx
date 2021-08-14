@@ -2,8 +2,9 @@ import {Component} from 'react';
 import {Button, Space, Table} from "antd";
 import {userList} from '../../api/user'
 import DeleteAdmin from "./DeleteAdmin";
+import AddAdmin from "./AddAdmin";
 
-interface IAdmin {
+export interface IAdmin {
     id: number
     name: string
     mobile: string
@@ -15,6 +16,7 @@ interface IState {
     current: number
     total: number
     loading: boolean
+    showAddAdminModal: boolean
 }
 
 class AdminList extends Component<any, IState> {
@@ -25,7 +27,8 @@ class AdminList extends Component<any, IState> {
             adminList: [],
             current: 1,
             total: 0,
-            loading: true
+            loading: true,
+            showAddAdminModal: false
         }
     }
 
@@ -54,13 +57,30 @@ class AdminList extends Component<any, IState> {
         }))
     }
 
+    showAddAdminModal = () => {
+        this.setState(() => ({
+            showAddAdminModal: true
+        }))
+    }
+
+    hideAddAdminModal = (refresh?:boolean) => {
+        if(refresh){
+            this.getUserList()
+        }
+        this.setState(() => ({
+            showAddAdminModal: false
+        }))
+    }
+
     componentDidMount() {
         this.getUserList()
     }
 
     render() {
         return (
-            <div>
+            <>
+                <Button type={'primary'} onClick={this.showAddAdminModal}>添加管理员</Button>
+                <AddAdmin visible={this.state.showAddAdminModal} callback={this.hideAddAdminModal}/>
                 <Table
                     loading={this.state.loading}
                     dataSource={this.state.adminList}
@@ -86,7 +106,7 @@ class AdminList extends Component<any, IState> {
                         )}/>
                 </Table>
 
-            </div>
+            </>
         );
     }
 }
