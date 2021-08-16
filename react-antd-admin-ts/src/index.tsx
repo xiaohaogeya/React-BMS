@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import {ConfigProvider} from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import {Provider} from 'mobx-react'
+import store from './store'
+moment.locale('cn');
 
 ReactDOM.render(
-  // <React.StrictMode>
-    <App />,
-  // </React.StrictMode>,
+    <ConfigProvider locale={zhCN}>
+        <Provider {...store}>
+            <App/>
+        </Provider>
+    </ConfigProvider>,
   document.getElementById('root')
 );
 

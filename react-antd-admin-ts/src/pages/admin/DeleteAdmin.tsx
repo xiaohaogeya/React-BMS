@@ -24,6 +24,8 @@ class DeleteAdmin extends Component<IProps> {
                     title='删除管理员'
                     onConfirm={this.deleteAdmin}
                     onCancel={() => message.info('取消删除')}
+                    cancelText={'取消'}
+                    okText={'确定'}
                 >
                     <Button type='primary' danger>删除</Button>
 

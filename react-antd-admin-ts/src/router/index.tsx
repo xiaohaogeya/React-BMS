@@ -1,10 +1,20 @@
-import React, {ReactNode, lazy} from "react";
+// import React, {ReactNode, lazy} from "react";
+import React, {ReactNode} from "react";
 import { UserOutlined,  DashboardOutlined } from '@ant-design/icons';
-const Dashboard = lazy(()=> import('../pages/index/Dashboard'))
-const Login = lazy(()=> import('../pages/Login'))
-const Page404 = lazy(()=> import('../pages/Page404'))
-const UserList = lazy(()=> import('../pages/user/UserList'))
-const AdminList = lazy(()=> import('../pages/admin/AdminList'))
+// const Dashboard = lazy(()=> import('../pages/index/Dashboard'))
+// const Login = lazy(()=> import('../pages/Login'))
+// const Page404 = lazy(()=> import('../pages/Page404'))
+// const UserList = lazy(()=> import('../pages/user/UserList'))
+// const AdminList = lazy(()=> import('../pages/admin/AdminList'))
+
+
+import Dashboard from "../pages/index/Dashboard";
+import Login from "../pages/Login";
+import Page404 from "../pages/Page404";
+import UserList from "../pages/user/UserList";
+import AdminList from "../pages/admin/AdminList";
+import RoleList from "../pages/role/RoleList";
+
 
 export interface IRouter {
     title: string
@@ -16,7 +26,7 @@ export interface IRouter {
     children?: IRouter[]
 }
 
-const router: IRouter[] = [
+export const leftRouter: IRouter[] = [
     {
         path: '/dashboard',
         title: '仪表盘',
@@ -54,7 +64,23 @@ const router: IRouter[] = [
                 component: <AdminList/>
             }
         ]
-    }
+    },
+    {
+        path: '/role',
+        title: '角色管理',
+        key: 'role',
+        icon: <UserOutlined/>,
+        children: [
+            {
+                path: '/role/list',
+                title: '角色列表',
+                key: 'roleList',
+                icon: <UserOutlined/>,
+                component: <RoleList/>
+            }
+        ]
+    },
+
 ]
 
 export const unAuthRouter: IRouter[] = [
@@ -70,6 +96,15 @@ export const unAuthRouter: IRouter[] = [
         key: '404',
         component: <Page404/>
     },
+]
+
+const topRouter: IRouter[] = [
+
+]
+
+const router: IRouter[] = [
+    ...leftRouter,
+    ...topRouter
 ]
 
 export default router

@@ -35,3 +35,12 @@ export const addAdmin = (data: any) => {
     }
     return _post(req)
 }
+
+// 获取用户信息
+export const userInfo = (data: any={}) => {
+    const req = {
+        data,
+        url: 'user_info/'
+    }
+    return _get(req)
+}
